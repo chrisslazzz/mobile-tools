@@ -86,7 +86,8 @@ rm -rf Payload && mkdir -p Payload
 cp -r "Release${FLAVOR_SUFFIXED}iphoneos/Runner.app" Payload
 
 # The ipa filename doubles as the "build name" shown by BrowserStack, see BS_BUILD_NAME above.
-ipa_filename="${BS_BUILD_NAME:-Runner}.ipa"
+ipa_filename="${BS_BUILD_NAME//\//-}"
+ipa_filename="${ipa_filename:-Runner}.ipa"
 zip -r "$ipa_filename" Payload >/dev/null
 
 cd - >/dev/null || exit 1
